@@ -1,0 +1,5 @@
+ImmutableMultiDict([('phrase', 'Life, the universe and everything!'), ('letters', 'aeiou')])|127.0.0.1|Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:64.0) Gecko/20100101 Firefox/64.0|{'e', 'u', 'i', 'a'}
+ImmutableMultiDict([('phrase', 'hello bro'), ('letters', 'rap?')])|127.0.0.1|Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:64.0) Gecko/20100101 Firefox/64.0|{'r'}
+ImmutableMultiDict([('phrase', 'my mushrooms sdagi'), ('letters', 'sick?')])|127.0.0.1|Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:64.0) Gecko/20100101 Firefox/64.0|{'s', 'i'}
+ImmutableMultiDict([('phrase', 'galaxy'), ('letters', 'r')])|127.0.0.1|Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:64.0) Gecko/20100101 Firefox/64.0|set()
+ImmutableMultiDict([('phrase', 'Rome total war'), ('letters', 'qi')])|127.0.0.1|Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:64.0) Gecko/20100101 Firefox/64.0|set()
