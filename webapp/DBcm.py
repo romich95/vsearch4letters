@@ -20,9 +20,16 @@ Simple example usage:
 """
 import mysql.connector
 
+class ConnectionError(Exception):
+    pass
+
+class CredentialsError(Exception):
+    pass
+
+class SQLError(Exception):
+    pass
 
 class UseDatabase:
-    
     def __init__(self, config: dict) -> None:
         """Add the database configuration parameters to the object.
 
@@ -43,9 +50,14 @@ class UseDatabase:
 
         Return the database cursor to the context manager.
         """
-        self.conn = mysql.connector.connect(**self.configuration)
-        self.cursor = self.conn.cursor()
-        return self.cursor
+        try:            
+            self.conn = mysql.connector.connect(**self.configuration)
+            self.cursor = self.conn.cursor()
+            return self.cursor
+        except mysql.connector.errors.InterfaceError as err:
+            raise ConnectionError(err)
+        except mysql.connector.errors.ProgrammingError as err:
+            raise CredentialsError(err)
 
     def __exit__(self, exc_type, exc_value, exc_trace) -> None:
         """Destroy the cursor as well as the connection (after committing).
@@ -53,3 +65,7 @@ class UseDatabase:
         self.conn.commit()
         self.cursor.close()
         self.conn.close()
+        if exc_type is mysql.connector.errors.ProgrammingError:
+            raise SQLError(exc_value)
+        elif exc_type:
+            raise exc_type(exc_value)
