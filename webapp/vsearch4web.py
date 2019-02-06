@@ -50,12 +50,14 @@ def entry_page() -> 'html':
 @app.route('/viewlog')
 def view_the_log() -> 'html':
     """Display the contents of the log file as a HTML table."""
-    
-    with UseDatabase(app.config['dbconfig']) as cursor:
-        _SQL = """select phrase, letters, ip, browser_string, results
-                  from log"""
-        cursor.execute(_SQL)
-        contents = cursor.fetchall()
+    try:
+        with UseDatabase(app.config['dbconfig']) as cursor:
+            _SQL = """select phrase, letters, ip, browser_string, results
+                      from log"""
+            cursor.execute(_SQL)
+            contents = cursor.fetchall()
+    except Exception as err:
+        print('Something went wrong:', str(err))
     titles = ('Phrase', 'Letters', 'Remote_addr', 'User_agent', 'Results')
     return render_template('viewlog.html',
                            the_title='View Log',
